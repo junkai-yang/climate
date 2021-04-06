@@ -2,11 +2,12 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TestComponent} from "./test/test.component";
 import {WordCloudComponent} from "./word-cloud/word-cloud.component";
+import {LineGraphComponent} from "./line-graph/line-graph.component";
 
 const routes: Routes = [
   {
     path: 'test',
-    component: WordCloudComponent
+    component: WordCloudComponent,
   },
   {
     path: '**',
