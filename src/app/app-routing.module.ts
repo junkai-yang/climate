@@ -10,6 +10,7 @@ const routes: Routes = [
     path: 'graph',
     loadChildren: () => import('./graph/graph.module').then(mod => mod.GraphModule)
   },
+
   {
     path: '**',
     redirectTo: 'home'

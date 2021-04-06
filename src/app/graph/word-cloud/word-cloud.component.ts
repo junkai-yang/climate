@@ -97,4 +97,7 @@ export class WordCloudComponent implements OnInit {
       console.log(word.data.name.trim())
     })
   }
+  click() {
+    console.log('click')
+  }
 }

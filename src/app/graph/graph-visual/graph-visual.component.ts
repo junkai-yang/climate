@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from "echarts";
+import {GraphService} from "../graph.service";
 
 
 @Component({
@@ -11,19 +12,19 @@ export class GraphVisualComponent implements OnInit {
 
   chart;
 
-  constructor() { }
+  constructor(private service:GraphService) { }
 
   ngOnInit(): void {
     this.chart = echarts.init(document.getElementById('visual'));
     this.chart.setOption({
       title: {
-        text: '折线图堆叠'
+        text: 'Overlay'
       },
       tooltip: {
         trigger: 'axis'
       },
       legend: {
-        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+        data: ['A', 'S', 'D', 'F', 'G']
       },
       grid: {
         left: '3%',
@@ -46,38 +47,41 @@ export class GraphVisualComponent implements OnInit {
       },
       series: [
         {
-          name: '邮件营销',
+          name: 'A',
           type: 'line',
           stack: '总量',
           data: [120, 132, 101, 134, 90, 230, 210]
         },
         {
-          name: '联盟广告',
+          name: 'S',
           type: 'line',
           stack: '总量',
           data: [220, 182, 191, 234, 290, 330, 310]
         },
         {
-          name: '视频广告',
+          name: 'D',
           type: 'line',
           stack: '总量',
           data: [150, 232, 201, 154, 190, 330, 410]
         },
         {
-          name: '直接访问',
+          name: 'F',
           type: 'line',
           stack: '总量',
           data: [320, 332, 301, 334, 390, 330, 320]
         },
         {
-          name: '搜索引擎',
+          name: 'G',
           type: 'line',
           stack: '总量',
           data: [820, 932, 901, 934, 1290, 1330, 1320]
         }
       ]
     })
+  }
 
+  click() {
+    console.log('click')
   }
 
 }

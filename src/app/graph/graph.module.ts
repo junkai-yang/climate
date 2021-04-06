@@ -8,10 +8,17 @@ import { LineGraphComponent } from './line-graph/line-graph.component';
 import { GraphVisualComponent } from './graph-visual/graph-visual.component';
 import {NzIconModule} from "ng-zorro-antd/icon";
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import {Sum1Component} from "./sum1/sum1.component";
+import {HeatMapComponent} from "./heat-map/heat-map.component";
+
 
 
 @NgModule({
-  declarations: [TestComponent, WordCloudComponent, LineGraphComponent, GraphVisualComponent],
+  declarations: [TestComponent, WordCloudComponent, LineGraphComponent, GraphVisualComponent,HeatMapComponent,
+    Sum1Component],
+  exports: [
+    Sum1Component
+  ],
   imports: [
     CommonModule,
     GraphRoutingModule,
