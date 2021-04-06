@@ -14,8 +14,7 @@ export class LineGraphComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.chart = echarts.init(document.getElementById('main'));
+    this.chart = echarts.init(document.getElementById('line'));
     this.chart.setOption({
         title: {
           text: '堆叠区域图'
@@ -112,6 +111,10 @@ export class LineGraphComponent implements OnInit {
           }
         ]
     })
+  }
+
+  click() {
+    console.log('click')
   }
 
 }
