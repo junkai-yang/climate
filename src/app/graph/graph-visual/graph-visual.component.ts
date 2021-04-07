@@ -80,8 +80,5 @@ export class GraphVisualComponent implements OnInit {
     })
   }
 
-  click() {
-    console.log('click')
-  }
 
 }
