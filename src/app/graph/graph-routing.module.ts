@@ -3,9 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {TestComponent} from "./test/test.component";
 import {WordCloudComponent} from "./word-cloud/word-cloud.component";
 import {LineGraphComponent} from "./line-graph/line-graph.component";
-import {GraphVisualComponent} from "./graph-visual/graph-visual.component";
 import {Sum1Component} from "./sum1/sum1.component";
 import {HeatMapComponent} from "./heat-map/heat-map.component";
+import {ForceGraphComponent} from "./force-graph/force-graph.component";
 
 const routes: Routes = [
   {
@@ -13,8 +13,8 @@ const routes: Routes = [
     component: TestComponent,
   },
   {
-    path: 'LineGraph',
-    component: GraphVisualComponent,
+    path: 'NodeGraph',
+    component: ForceGraphComponent,
   },
   {
     path: 'WordCloud',
@@ -27,10 +27,6 @@ const routes: Routes = [
   {
     path: 'HeatMap',
     component: HeatMapComponent,
-  },
-  {
-    path: 'test5',
-    component: Sum1Component,
   },
   {
     path: '**',
