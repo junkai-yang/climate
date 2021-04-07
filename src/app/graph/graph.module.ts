@@ -17,7 +17,11 @@ import { ForceGraphComponent } from './force-graph/force-graph.component';
   declarations: [TestComponent, WordCloudComponent, LineGraphComponent,HeatMapComponent,
     Sum1Component, ForceGraphComponent],
   exports: [
-    Sum1Component
+    Sum1Component,
+    ForceGraphComponent,
+    LineGraphComponent,
+    HeatMapComponent,
+    WordCloudComponent
   ],
   imports: [
     CommonModule,

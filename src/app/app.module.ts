@@ -15,6 +15,7 @@ import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzMenuModule} from "ng-zorro-antd/menu";
 import {LayoutModule} from "./layout/layout.module";
 import {NzGridModule} from "ng-zorro-antd/grid";
+import {GraphModule} from "./graph/graph.module";
 
 
 registerLocaleData(zh);
@@ -35,6 +36,7 @@ registerLocaleData(zh);
     NzMenuModule,
     LayoutModule,
     NzGridModule,
+    GraphModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
