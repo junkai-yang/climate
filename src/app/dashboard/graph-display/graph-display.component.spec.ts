@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GraphVisualComponent } from './graph-visual.component';
+import { GraphDisplayComponent } from './graph-display.component';
 
-describe('GraphVisualComponent', () => {
-  let component: GraphVisualComponent;
-  let fixture: ComponentFixture<GraphVisualComponent>;
+describe('GraphDisplayComponent', () => {
+  let component: GraphDisplayComponent;
+  let fixture: ComponentFixture<GraphDisplayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GraphVisualComponent ]
+      declarations: [ GraphDisplayComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GraphVisualComponent);
+    fixture = TestBed.createComponent(GraphDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
