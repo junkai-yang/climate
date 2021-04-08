@@ -8,6 +8,7 @@ import {Router, ActivatedRoute, NavigationEnd} from "@angular/router";
 })
 export class BreadcrumbComponent implements OnInit {
   routerPath: string = "";
+  routerSplit;
 
   constructor(
     private router: Router,
@@ -18,11 +19,27 @@ export class BreadcrumbComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((data) => {
       if (data instanceof NavigationEnd) {
-        console.log(this.activatedRoute.snapshot)
+        // console.log(this.activatedRoute.snapshot)
         this.routerPath = data.url.substr(1);
-        console.log("Router方式:", this.routerPath.split('/'));
+        this.routerSplit = this.routerPath.split('/')
+        // console.log("Router方式:", this.routerPath);
+        let graphs:any = JSON.parse(localStorage.getItem('ContainGraph')) || {'Graph':[]}
+        // console.log(graphs)
+        if (this.routerSplit[0] === 'home') {
+          // console.log(graphs)
+          if (graphs.Graph === [] || graphs.Graph.indexOf(this.routerSplit[1]) == -1){
+            graphs.Graph.push(this.routerSplit[1])
+            console.log(graphs)
+            localStorage.setItem('ContainGraph',JSON.stringify(graphs))
+          }
+        }
+
       }
     })
+  }
+
+  clear() {
+    localStorage.removeItem('ContainGraph')
   }
 
 }
