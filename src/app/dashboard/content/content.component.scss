@@ -3,6 +3,13 @@
 }
 .slider-container {
   margin-bottom: 16px;
+  padding: 10px;
+}
+
+.gutter-row {
+  position: relative;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
 }
 .grid-config {
   height: 33vh;
@@ -11,4 +18,10 @@
   //background: #0092ff;
 }
 .grid-elems {
+  margin: 5px;
+  //margin-right: auto;
+  //margin-left: auto;
+  //margin-bottom: 10px;
+  //border:1px solid;
+  //border-radius:25px;
 }
