@@ -23,6 +23,7 @@
     "@antv/g6": "^4.2.5",
     "@antv/l7": "^2.3.9",
     "@antv/l7-maps": "^2.3.9",
+    "bootstrap": "^5.0.0-beta3",
     "echarts": "^5.0.2",
     "echarts-wordcloud": "^2.0.0",
     "force-graph": "^1.40.0",

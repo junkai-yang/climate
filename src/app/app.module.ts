@@ -17,6 +17,8 @@ import {LayoutModule} from "./layout/layout.module";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {GraphModule} from "./graph/graph.module";
 
+// import { NzDemoLayoutCustomTriggerComponent } from './app.component';
+
 
 registerLocaleData(zh);
 

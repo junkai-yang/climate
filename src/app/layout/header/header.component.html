@@ -1,6 +1,8 @@
-<div class="logo">climate demo</div>
-<ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-  <li nz-menu-item nzSelected>nav 1</li>
-  <li nz-menu-item>nav 2</li>
-  <li nz-menu-item>nav 3</li>
-</ul>
+<!--<div class="logo">climate demo</div>-->
+<nz-header nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+  <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+</nz-header>
+
+<!--<ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">-->
+<!--  <li nz-menu-item nzSelected>nav 1</li>-->
+<!--</ul>-->

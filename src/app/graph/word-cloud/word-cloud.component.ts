@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import {Component, OnInit, Output,EventEmitter} from '@angular/core';
 import * as echarts from 'echarts'
 import 'echarts-wordcloud';
 import {GraphService} from "../graph.service";
@@ -11,7 +11,6 @@ import {GraphService} from "../graph.service";
 export class WordCloudComponent implements OnInit {
   chart // create canvas
   @Output() msg = new EventEmitter()
-
   constructor(private service: GraphService) {
   }
 

@@ -18,6 +18,7 @@ export class ContentComponent implements OnInit {
   }
 
   getWordCloud(event) {
+    console.log(event)
     this.param_WordCloud = event.param.name;
   }
 
