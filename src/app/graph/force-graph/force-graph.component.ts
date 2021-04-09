@@ -1,101 +1,114 @@
-import {Component, OnInit} from '@angular/core';
-import G6 from '@antv/g6';
-import insertCss from 'insert-css';
+import {Component, OnInit, Input, OnChanges,} from '@angular/core';
+import ForceGraph from 'force-graph';
 
 @Component({
   selector: 'app-force-graph',
   templateUrl: './force-graph.component.html',
   styleUrls: ['./force-graph.component.scss']
 })
-export class ForceGraphComponent implements OnInit {
-  tooltip;
-  container;
-  graph;
+export class ForceGraphComponent implements OnInit, OnChanges {
+  @Input() WordCloudParam;
+  @Input() height;
+  @Input() width;
+
+  N = 80;
+  gData = {
+    nodes: [...Array(this.N).keys()].map(i => ({id: i})),
+    links: [...Array(this.N).keys()]
+      .filter(id => id)
+      .map(id => ({
+        source: id,
+        target: Math.round(Math.random() * (id - 1))
+      }))
+  };
+
+  elem;
+  ForceGraph = ForceGraph(); // init graph
+
+  NODE_R = 8;
+  highlightNodes = new Set();
+  highlightLinks = new Set();
+  hoverNode = null;
+
+
   constructor() {
   }
 
-  ngOnInit(): void {
-    this.container = document.getElementById('container')
-    this.tooltip = new G6.Tooltip({
-      offsetX: 10,
-      offsetY: 10,
-      fixToNode: [1, 0.5],
-      // the types of items that allow the tooltip show up
-      // 允许出现 tooltip 的 item 类型
-      itemTypes: ['node', 'edge'],
-      // custom the tooltip's content
-      // 自定义 tooltip 内容
-      getContent: (e) => {
-        const outDiv = document.createElement('div');
-        outDiv.style.width = 'fit-content';
-        outDiv.style.height = 'fit-content';
-        const model = e.item.getModel();
-        if (e.item.getType() === 'node') {
-          outDiv.innerHTML = `${model.name}`;
-        } else {
-          const source = e.item.getSource();
-          const target = e.item.getTarget();
-          outDiv.innerHTML = `来源：${source.getModel().name}<br/>去向：${target.getModel().name}`;
+  ngOnChanges(changes): void {
+    console.log(changes)
+    if (changes.WordCloudParam && changes.WordCloudParam.currentValue !== undefined){
+      this.WordCloudParam = changes.currentValue
+      for (let node of this.gData.nodes) {
+        if (node.id === 1) {
+          this.clickNode(node)
         }
-        return outDiv;
-      },
+      }
+    }
+
+  }
+
+  ngOnInit(): void {
+
+    this.gData.links.forEach(link => {
+      const a: any = this.gData.nodes[link.source];
+      const b: any = this.gData.nodes[link.target];
+
+      !a.neighbors && (a.neighbors = []);
+      !b.neighbors && (b.neighbors = []);
+      a.neighbors.push(b);
+      b.neighbors.push(a);
+
+      !a.links && (a.links = []);
+      !b.links && (b.links = []);
+      a.links.push(link);
+      b.links.push(link);
     });
 
-    const width = this.container.scrollWidth || 800;
-    const height = this.container.scrollHeight || 500;
+    this.elem = document.getElementById('container');
 
-    this.graph = new G6.Graph({
-      container: 'container',
-      width,
-      height,
-      layout: {
-        type: 'force',
-        edgeStrength: 0.7,
-      },
-      plugins: [this.tooltip],
-      modes: {
-        default: ['drag-canvas', 'activate-relations'],
-      },
-      defaultNode: {
-        size: [10, 10],
-        /* style for the keyShape */
-        // style: {
-        //   lineWidth: 2,
-        //   fill: '#DEE9FF',
-        //   stroke: '#5B8FF9',
-        // },
-      },
-      defaultEdge: {
-        /* style for the keyShape */
-        style: {
-          stroke: '#aaa',
-          lineAppendWidth: 2,
-          opacity: 0.3,
-        },
-      },
-      /* styles for different states, there are built-in styles for states: active, inactive, selected, highlight, disable */
-      // nodeStateStyles: {
-      //   active: {
-      //     opacity: 1,
-      //   },
-      //   inactive: {
-      //     opacity: 0.2,
-      //   },
-      // },
-      // edgeStateStyles: {
-      //   active: {
-      //     stroke: '#999',
-      //   },
-      // },
-    });
+    this.ForceGraph(this.elem)
+      .width(600)
+      .height(600)
+      .graphData(this.gData)
+      .nodeRelSize(this.NODE_R)
+      .onNodeClick(node => this.clickNode(node))
+      .onLinkClick(link => {
+        this.highlightNodes.clear();
+        this.highlightNodes.clear();
 
-    fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/xiaomi.json')
-      .then((res) => res.json())
-      .then((data) => {
-        this.graph.data(data);
-        this.graph.render();
+        if (link) {
+          this.highlightNodes.add(link);
+          this.highlightNodes.add(link.source);
+          this.highlightNodes.add(link.target);
+        }
+      })
+      .autoPauseRedraw(false) // keep redrawing after engine has stopped
+      .linkWidth(link => this.highlightNodes.has(link) ? 5 : 1)
+      .linkDirectionalParticles(4)
+      .linkDirectionalParticleWidth(link => this.highlightNodes.has(link) ? 4 : 0)
+      .nodeCanvasObjectMode(node => this.highlightNodes.has(node) ? 'before' : undefined)
+      .nodeCanvasObject((node, ctx) => {
+        // add ring just for highlighted nodes
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, this.NODE_R * 1.4, 0, 2 * Math.PI, false);
+        ctx.fillStyle = node === this.hoverNode ? 'red' : 'orange';
+        ctx.fill();
       });
 
+
+  }
+
+  clickNode(Node) {
+    this.highlightNodes.clear();
+    this.highlightLinks.clear();
+    if (Node) {
+      this.highlightNodes.add(Node);
+      Node.neighbors.forEach(neighbor => this.highlightNodes.add(neighbor));
+      Node.links.forEach(link => this.highlightNodes.add(link));
+    }
+
+    this.hoverNode = Node || null;
+    this.elem.style.cursor = Node ? '-webkit-grab' : null;
   }
 
 }

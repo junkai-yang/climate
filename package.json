@@ -25,6 +25,7 @@
     "@antv/l7-maps": "^2.3.9",
     "echarts": "^5.0.2",
     "echarts-wordcloud": "^2.0.0",
+    "force-graph": "^1.40.0",
     "insert-css": "^2.0.0",
     "ng-zorro-antd": "^11.3.0",
     "rxjs": "~6.6.0",

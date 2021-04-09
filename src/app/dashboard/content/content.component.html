@@ -9,7 +9,7 @@
   <div nz-col class="gutter-row" [nzSpan]="12">
     <div class="grid-config">
       <div class="grid-elems height-100" style="width:50%; height:30%">
-        <app-word-cloud></app-word-cloud>
+        <app-word-cloud (msg)="getWordCloud($event)"></app-word-cloud>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
   <div nz-col class="gutter-row" [nzSpan]="12">
     <div class="grid-config">
       <div class="grid-elems height-100" style="width:450px; height:350px">
-        <app-force-graph></app-force-graph>
+        <app-force-graph [WordCloudParam]="param_WordCloud"></app-force-graph>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import * as echarts from 'echarts'
 import 'echarts-wordcloud';
 import {GraphService} from "../graph.service";
@@ -10,6 +10,7 @@ import {GraphService} from "../graph.service";
 })
 export class WordCloudComponent implements OnInit {
   chart // create canvas
+  @Output() msg = new EventEmitter()
 
   constructor(private service: GraphService) {
   }
@@ -85,19 +86,19 @@ export class WordCloudComponent implements OnInit {
           { "value": 134, "name": "散步  晕倒  男婴  被盗" },
           { "value": 132, "name": "松原  5.1 级 地震" },
           { "value": 143, "name": "印第安纳州  枪击案" },
-          { "value": 156, "name": "苏志 燮赵 恩情  恋情" }
+          { "value": 156, "name": "苏志 燮赵 恩情  恋情" },
+          { "value": 312, "name": "刘敏"}
         ],
       }]
     })
+
+
     this.getClickValue()
   }
 
   getClickValue() {
     this.chart.on('click',function (word) {
-      console.log(word.data.name.trim())
-    })
-  }
-  click() {
-    console.log('click')
+      this.msg.emit({'param':word})
+    }.bind(this))
   }
 }
