@@ -18,7 +18,7 @@ export class HeatMapComponent implements OnInit {
       id: 'map',
       logoVisible: false,
       map: new Mapbox({
-        style: 'dark',
+        style: 'light',
         pitch: 0,
         center: [ 127.5671666579043, 7.445038892195569 ],
         zoom: 2.632456779444394,

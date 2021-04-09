@@ -19,7 +19,7 @@ export class LineGraphComponent implements OnInit {
     this.chart = echarts.init(document.getElementById('line'));
     this.chart.setOption({
         title: {
-          text: 'Overlay'
+          text: 'LineChart'
         },
         tooltip: {
           trigger: 'axis',
@@ -33,11 +33,6 @@ export class LineGraphComponent implements OnInit {
         legend: {
           data: ['A', 'S', 'D', 'F', 'G']
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {}
-          }
-        },
         grid: {
           left: '3%',
           right: '4%',
@@ -48,7 +43,7 @@ export class LineGraphComponent implements OnInit {
           {
             type: 'category',
             boundaryGap: false,
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
           }
         ],
         yAxis: [

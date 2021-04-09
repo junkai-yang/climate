@@ -37,9 +37,9 @@ export class ForceGraphComponent implements OnInit, OnChanges {
   ngOnChanges(changes): void {
     console.log(changes)
     if (changes.WordCloudParam && changes.WordCloudParam.currentValue !== undefined){
-      this.WordCloudParam = changes.currentValue
+      this.WordCloudParam = changes.WordCloudParam.currentValue
       for (let node of this.gData.nodes) {
-        if (node.id === 1) {
+        if (node.id === Number(this.WordCloudParam)) {
           this.clickNode(node)
         }
       }
@@ -67,8 +67,8 @@ export class ForceGraphComponent implements OnInit, OnChanges {
     this.elem = document.getElementById('container');
 
     this.ForceGraph(this.elem)
-      .width(600)
-      .height(600)
+      .width(430)
+      .height(238)
       .graphData(this.gData)
       .nodeRelSize(this.NODE_R)
       .onNodeClick(node => this.clickNode(node))
