@@ -9,5 +9,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'climate';
   isCollapsed = false;
+
+  collapsed (event) {
+    this.isCollapsed = event.collapsed
+  }
 }
 
