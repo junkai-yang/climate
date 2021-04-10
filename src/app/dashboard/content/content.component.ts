@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
   param_WordCloud;
-  dom = document.getElementsByClassName('gutter-row')
+  // dom = document.getElementsByClassName('gutter-row')
   constructor() { }
 
   ngOnInit(): void {
-
-    console.log(this.dom[0].scrollHeight)
-    console.log(this.dom)
-    console.log(this.dom[1].clientWidth)
+    //
+    // console.log(this.dom[0].scrollHeight)
+    // console.log(this.dom)
+    // console.log(this.dom[1].clientWidth)
   }
 
   getWordCloud(event) {

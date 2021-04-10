@@ -1,6 +1,46 @@
-<nz-layout>
+<nz-layout class="layout">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <app-side-bar></app-side-bar>
+    <div class="logo" >{{isCollapsed ? 'CAB' : "Climate Action Beacon"}}</div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzTitle="Combine Graph" nzIcon="user">
+        <ul>
+          <a href="javascript:void(0)" routerLink="/home/content">
+            <li nz-menu-item nzSelected>Overall</li>
+          </a>
+          <a href="javascript:void(0)" routerLink="/home/LineGraph">
+            <li nz-menu-item>LineGraph</li>
+          </a>
+          <a href="javascript:void(0)" routerLink="/home/WordCloud">
+            <li nz-menu-item>WordCloud</li>
+          </a>
+          <a href="javascript:void(0)" routerLink="/home/StackGraph">
+            <li nz-menu-item>StackGraph</li>
+          </a>
+        </ul>
+      </li>
+          <li nz-submenu nzTitle="Single Graph" nzIcon="laptop">
+            <ul>
+              <a href="javascript:void(0)" routerLink="/graph/LineGraph">
+                <li nz-menu-item>LineGraph</li>
+              </a>
+              <a href="javascript:void(0)" routerLink="/graph/WordCloud">
+                <li nz-menu-item>WordCloud</li>
+              </a>
+              <a href="javascript:void(0)" routerLink="/graph/StackGraph">
+                <li nz-menu-item>StackGraph</li>
+              </a>
+              <a href="javascript:void(0)" routerLink="/graph/HeatMap">
+                <li nz-menu-item>HeatMap</li>
+              </a>
+              <a href="javascript:void(0)" routerLink="/graph/NodeGraph">
+                <li nz-menu-item>NodeGraph</li>
+              </a>
+              <a href="javascript:void(0)" routerLink="/graph/test">
+                <li nz-menu-item>Test</li>
+              </a>
+            </ul>
+          </li>
+    </ul>
   </nz-sider>
 
   <nz-layout>
@@ -9,7 +49,9 @@
     </nz-header>
     <nz-content>
       <app-breadcrumb></app-breadcrumb>
-      <nz-content><router-outlet></router-outlet></nz-content>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
     </nz-content>
   </nz-layout>
 </nz-layout>
