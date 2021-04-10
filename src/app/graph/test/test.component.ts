@@ -18,7 +18,7 @@ import {WordCloudComponent} from "../word-cloud/word-cloud.component";
 export class TestComponent implements OnInit {
   @ViewChild('testContainer', {read: ViewContainerRef}) container;
   componentRef: ComponentRef<WordCloudComponent>;
-
+  test;
   constructor(private resolver: ComponentFactoryResolver) {
   }
 

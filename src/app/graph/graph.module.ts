@@ -10,6 +10,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import {Sum1Component} from "./sum1/sum1.component";
 import {HeatMapComponent} from "./heat-map/heat-map.component";
 import { ForceGraphComponent } from './force-graph/force-graph.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -23,11 +24,12 @@ import { ForceGraphComponent } from './force-graph/force-graph.component';
     HeatMapComponent,
     WordCloudComponent
   ],
-  imports: [
-    CommonModule,
-    GraphRoutingModule,
-    NzIconModule,
-    NzGridModule,
-  ]
+    imports: [
+        CommonModule,
+        GraphRoutingModule,
+        NzIconModule,
+        NzGridModule,
+        FormsModule,
+    ]
 })
 export class GraphModule { }

@@ -1,28 +1,18 @@
 <nz-breadcrumb>
-  <div class="info">Information Platform
-    <nz-date-picker
-      [nzDisabledDate]="disabledStartDate"
-      nzShowTime
-      nzFormat="yyyy-MM-dd HH:mm:ss"
-      [(ngModel)]="startValue"
-      nzPlaceHolder="Start"
-      (nzOnOpenChange)="handleStartOpenChange($event)"
-    ></nz-date-picker>
-    <nz-date-picker
-      #endDatePicker
-      [nzDisabledDate]="disabledEndDate"
-      nzShowTime
-      nzFormat="yyyy-MM-dd HH:mm:ss"
-      [(ngModel)]="endValue"
-      nzPlaceHolder="End"
-      (nzOnOpenChange)="handleEndOpenChange($event)"
-    ></nz-date-picker>
-    <button type="button" id="searchDate" class="button">Search</button>
-    <button type="button" id="clearDate" class="button">Clear</button>
-    <div class="right">
-    <nz-breadcrumb-item  *ngFor="let param of routerPath.split('/')">{{param}}</nz-breadcrumb-item>
-    </div>
+  <div style="display: inline">
+    <nz-breadcrumb-item *ngFor="let param of routerPath.split('/')">{{param}}</nz-breadcrumb-item>
   </div>
-<!--  <button (click)="clear()">clear</button>-->
+
+    <div class="right">
+      <div class="info" id="date">Information Platform
+        <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
+        <button type="button" id="searchDate" class="button" (click)="emitDate()">Search</button>
+    </div>
+      <div class="info" id="date1">
+        <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
+        <i nz-icon nzType="search" nzTheme="outline" (click)="emitDate() " style="padding: 0 0 2px 6px"></i>
+      </div>
+  </div>
+  <!--  <button (click)="clear()">clear</button>-->
 
 </nz-breadcrumb>

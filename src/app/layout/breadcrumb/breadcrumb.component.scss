@@ -5,7 +5,7 @@ nz-breadcrumb {
   white-space:nowrap;
 }
 .right {
-  float:right
+  float:right;
 }
 .nz-date-picker {
   margin: 0 8px 12px 0;
@@ -20,4 +20,23 @@ nz-breadcrumb {
   font-size: 13px;
   Margin-LEFT: 15PX;
   border-radius:4px;
+}
+
+@media (max-width: 992px)
+{
+  #date{
+    display: none;
+    padding-bottom: 5px;
+  }
+
+  #date1 {
+    display: block;
+    padding-bottom: 5px;
+  }
+}
+@media (min-width: 991px)
+{
+ #date1 {
+   display: none;
+ }
 }

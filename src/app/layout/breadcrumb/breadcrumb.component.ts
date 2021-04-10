@@ -10,35 +10,10 @@ import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 export class BreadcrumbComponent implements OnInit {
   routerPath: string = "";
   routerSplit;
+  dateFormat = 'yyyy/MM/dd';
+  date;
 
-  startValue: Date | null = null;
-  endValue: Date | null = null;
-  @ViewChild('endDatePicker') endDatePicker!: NzDatePickerComponent;
 
-  disabledStartDate = (startValue: Date): boolean => {
-    if (!startValue || !this.endValue) {
-      return false;
-    }
-    return startValue.getTime() > this.endValue.getTime();
-  };
-
-  disabledEndDate = (endValue: Date): boolean => {
-    if (!endValue || !this.startValue) {
-      return false;
-    }
-    return endValue.getTime() <= this.startValue.getTime();
-  };
-
-  handleStartOpenChange(open: boolean): void {
-    if (!open) {
-      this.endDatePicker.open();
-    }
-    console.log('handleStartOpenChange', open);
-  }
-
-  handleEndOpenChange(open: boolean): void {
-    console.log('handleEndOpenChange', open);
-  }
 
   constructor(
     private router: Router,
@@ -70,6 +45,19 @@ export class BreadcrumbComponent implements OnInit {
 
   clear() {
     localStorage.removeItem('ContainGraph')
+  }
+
+
+
+  emitDate() {
+    if (this.date){
+      const date = {
+        'start': this.date[0],
+        'end': this.date[1]
+      }
+      console.log(date)
+    }
+
   }
 
 }
