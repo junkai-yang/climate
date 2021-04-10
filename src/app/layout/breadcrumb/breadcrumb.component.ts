@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, NavigationEnd} from "@angular/router";
+import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -9,6 +10,35 @@ import {Router, ActivatedRoute, NavigationEnd} from "@angular/router";
 export class BreadcrumbComponent implements OnInit {
   routerPath: string = "";
   routerSplit;
+
+  startValue: Date | null = null;
+  endValue: Date | null = null;
+  @ViewChild('endDatePicker') endDatePicker!: NzDatePickerComponent;
+
+  disabledStartDate = (startValue: Date): boolean => {
+    if (!startValue || !this.endValue) {
+      return false;
+    }
+    return startValue.getTime() > this.endValue.getTime();
+  };
+
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.startValue) {
+      return false;
+    }
+    return endValue.getTime() <= this.startValue.getTime();
+  };
+
+  handleStartOpenChange(open: boolean): void {
+    if (!open) {
+      this.endDatePicker.open();
+    }
+    console.log('handleStartOpenChange', open);
+  }
+
+  handleEndOpenChange(open: boolean): void {
+    console.log('handleEndOpenChange', open);
+  }
 
   constructor(
     private router: Router,

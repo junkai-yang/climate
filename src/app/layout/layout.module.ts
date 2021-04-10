@@ -8,6 +8,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import {GraphRoutingModule} from "../graph/graph-routing.module";
 import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [HeaderComponent, BreadcrumbComponent],
@@ -22,6 +24,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
     GraphRoutingModule,
     NzLayoutModule,
     NzIconModule,
+    NzDatePickerModule,
+    FormsModule,
   ]
 })
 export class LayoutModule { }

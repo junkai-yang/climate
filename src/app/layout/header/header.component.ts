@@ -19,5 +19,4 @@ export class HeaderComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed
     this.msg.emit({'collapsed':this.isCollapsed})
   }
-
 }
