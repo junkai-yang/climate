@@ -18,9 +18,6 @@ export class LineGraphComponent implements OnInit {
   ngOnInit(): void {
     this.chart = echarts.init(document.getElementById('line'));
     this.chart.setOption({
-        title: {
-          text: 'LineChart'
-        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {

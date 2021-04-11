@@ -96,6 +96,7 @@ export class WordCloudComponent implements OnInit {
 
   getClickValue() {
     this.chart.on('click',function (word) {
+      console.log(word)
       this.msg.emit({'param':word})
     }.bind(this))
   }

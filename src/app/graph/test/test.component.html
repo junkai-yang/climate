@@ -2,9 +2,15 @@
 <button (click)="createComponent()">来一个</button>
 <button (click)="remove()">删除</button>
 <div class="row mb-2">
-<div class="col-lg-6 themed-grid-col">.col-md-6</div>
-<div class="col-lg-6 themed-grid-col">.col-md-6</div>
+  <div class="col-lg-6 themed-grid-col">
+    <nz-collapse>
+      <nz-collapse-panel [nzActive]="true" [nzShowArrow]="false" [nzHeader]="'title'">
+        <app-line-graph></app-line-graph>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </div>
+  <div class="col-lg-6 themed-grid-col">.col-md-6</div>
 </div>
 
-<input [(ngModel)]="test" >
-test : {{test}}
+
+

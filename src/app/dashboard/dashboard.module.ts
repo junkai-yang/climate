@@ -10,6 +10,7 @@ import {GraphDisplayComponent} from './graph-display/graph-display.component';
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {GraphModule} from "../graph/graph.module";
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {GraphModule} from "../graph/graph.module";
     NzIconModule,
     NzGridModule,
     GraphModule,
+    NzCollapseModule,
   ]
 })
 

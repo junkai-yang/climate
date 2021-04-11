@@ -1,6 +1,7 @@
 .layout {
   min-height: 100vh;
   height: auto;
+  overflow: auto;
 }
 
 nz-header {
@@ -35,3 +36,9 @@ a {
   background: #fff;
   min-height: 360px;
 }
+
+.out-layer {
+  min-width: 820px;
+}
+
+
