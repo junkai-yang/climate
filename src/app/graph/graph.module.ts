@@ -12,17 +12,19 @@ import {HeatMapComponent} from "./heat-map/heat-map.component";
 import {ForceGraphComponent} from './force-graph/force-graph.component';
 import {FormsModule} from "@angular/forms";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import { ForceGraphTDComponent } from './force-graph-td/force-graph-td.component';
 
 
 @NgModule({
   declarations: [TestComponent, WordCloudComponent, LineGraphComponent, HeatMapComponent,
-    Sum1Component, ForceGraphComponent],
+    Sum1Component, ForceGraphComponent, ForceGraphTDComponent],
   exports: [
     Sum1Component,
     ForceGraphComponent,
     LineGraphComponent,
     HeatMapComponent,
-    WordCloudComponent
+    WordCloudComponent,
+    ForceGraphTDComponent
   ],
   imports: [
     CommonModule,

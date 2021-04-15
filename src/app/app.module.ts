@@ -19,7 +19,6 @@ import {GraphModule} from "./graph/graph.module";
 import {NzIconModule} from "ng-zorro-antd/icon";
 
 
-
 registerLocaleData(en);
 
 @NgModule({

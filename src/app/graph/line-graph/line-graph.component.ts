@@ -28,7 +28,7 @@ export class LineGraphComponent implements OnInit {
           }
         },
         legend: {
-          data: ['A', 'S', 'D', 'F', 'G']
+          data: ['positive','negative','natural']
         },
         grid: {
           left: '3%',
@@ -50,37 +50,18 @@ export class LineGraphComponent implements OnInit {
         ],
         series: [
           {
-            name: 'A',
+            name: 'positive',
             type: 'line',
             stack: '总量',
             areaStyle: {},
             emphasis: {
               focus: 'series'
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: [0, 132, 101, 134, 90, 230, 210]
           },
+
           {
-            name: 'S',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {},
-            emphasis: {
-              focus: 'series'
-            },
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: 'D',
-            type: 'line',
-            stack: '总量',
-            areaStyle: {},
-            emphasis: {
-              focus: 'series'
-            },
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: 'F',
+            name: 'natural',
             type: 'line',
             stack: '总量',
             areaStyle: {},
@@ -90,7 +71,7 @@ export class LineGraphComponent implements OnInit {
             data: [320, 332, 301, 334, 390, 330, 320]
           },
           {
-            name: 'G',
+            name: 'negative',
             type: 'line',
             stack: '总量',
             label: {
