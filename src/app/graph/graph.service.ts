@@ -19,14 +19,8 @@ export class GraphService {
   /***
    * get Employee
    * ***/
-  getEmployeeInfo(): Observable<any>{
-    const url = this.host + `/goods/findGoods`;
-    const info = {
-      "province": "江苏"
-    }
-    // const url = this.APIURL + '/goods/findGoods'
-    console.log(url)
+  getWordCloud(info): Observable<any>{
+    const url = this.host + `/climateAU_MP/climateAU_MP_Count`;
     return this.http.post<any>(url,info);
-    // return this.http.get<any>(url);
   }
 }
