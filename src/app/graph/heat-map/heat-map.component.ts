@@ -51,12 +51,12 @@ export class HeatMapComponent implements OnInit {
         zoom: 2.632456779444394,
       })
     });
-    console.log(this.scene.getSize())
+    // console.log(this.scene.getSize())
     this.scene.on('loaded', () => {
       fetch('https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842f7010a7c6.json')
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          console.log(this.data)
           const layer = new HeatmapLayer({})
             .source(this.data)
             .shape('heatmap')

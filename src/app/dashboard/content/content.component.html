@@ -57,7 +57,7 @@
 <div class="row mb-2">
   <div class="col-lg-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
-      <nz-collapse-panel [nzActive]="collapse_line"  [nzHeader]="'Interactive Line Chart'">
+      <nz-collapse-panel [nzActive]="collapse_line"  [nzHeader]="'Interactive Line Chart'" [nzExtra]="extraTpl">
         <app-line-graph></app-line-graph>
       </nz-collapse-panel>
     </nz-collapse>
@@ -87,3 +87,7 @@
   </div>
 </div>
 
+<ng-template #extraTpl>
+  <!-- You can use stopPropagation if you don't want the panel to toggle -->
+  <i nz-icon nzType="link" nzTheme="outline"></i>
+</ng-template>

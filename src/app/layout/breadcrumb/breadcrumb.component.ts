@@ -25,7 +25,7 @@ export class BreadcrumbComponent implements OnInit {
     this.router.events.subscribe((data) => {
       if (data instanceof NavigationEnd) {
         // console.log(this.activatedRoute.snapshot)
-        this.routerPath = data.url.substr(1);
+        this.routerPath = data.url.substr(1) === "" ? "home/content" : data.url.substr(1);
         this.routerSplit = this.routerPath.split('/')
         console.log("Router方式:", this.routerPath);
         let graphs:any = JSON.parse(localStorage.getItem('ContainGraph')) || {'Graph':[]}

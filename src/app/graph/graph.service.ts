@@ -17,10 +17,10 @@ export class GraphService {
   }
 
   /***
-   * get Employee
+   * get WordCloud
    * ***/
-  getWordCloud(info): Observable<any>{
+  getWordCloud(info): Observable<any> {
     const url = this.host + `/climateAU_MP/climateAU_MP_Count`;
-    return this.http.post<any>(url,info);
+    return this.http.post<any>(url, info);
   }
 }
