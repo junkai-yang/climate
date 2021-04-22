@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://supergit.asuscomm.com:4000/",
+    "target": "https://supergit.cn:4000/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
