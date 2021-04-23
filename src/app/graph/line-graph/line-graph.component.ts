@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as echarts from "echarts";
 import {GraphService} from "../graph.service";
+import {NavigationEnd, Router} from "@angular/router";
 
 
 @Component({
@@ -11,8 +12,10 @@ import {GraphService} from "../graph.service";
 export class LineGraphComponent implements OnInit {
 
   chart;
+  routerPath;
 
-  constructor(private service:GraphService) {
+  constructor(private service:GraphService,
+              private router: Router) {
   }
 
   ngOnInit(): void {

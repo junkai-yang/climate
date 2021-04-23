@@ -15,23 +15,19 @@ const routes: Routes = [
   },
   {
     path: 'NodeGraph',
-    component: ForceGraphComponent,
+    component: ForceGraphTDComponent,
   },
   {
     path: 'WordCloud',
     component: WordCloudComponent,
   },
   {
-    path: 'StackGraph',
+    path: 'LineGraph',
     component: LineGraphComponent,
   },
   {
     path: 'HeatMap',
     component: HeatMapComponent,
-  },
-  {
-    path:'3d',
-    component:ForceGraphTDComponent
   },
   {
     path: '**',

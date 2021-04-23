@@ -98,7 +98,6 @@ export class WordCloudComponent implements OnInit {
         }]
       })
 
-
       this.getClickValue()
 
     // })

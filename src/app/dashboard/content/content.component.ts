@@ -22,4 +22,11 @@ export class ContentComponent implements OnInit {
     this.param_WordCloud = event.param.name;
   }
 
+  linkToLine(event) {
+    event.stopPropagation()
+    // console.log('work')
+    const domLine = document.getElementById('line')
+    console.log(domLine.parentNode.removeChild(domLine))
+  }
+
 }

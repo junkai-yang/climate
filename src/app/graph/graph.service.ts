@@ -9,9 +9,9 @@ export class GraphService {
 
   private httpOption = {} // for token
 
-  APIURL = `http://supergit.asuscomm.com:4000`
+  API = `https://supergit.cn:4000/`
 
-  host = '/api/'
+  // host = '/api/'
 
   constructor(private http: HttpClient) {
   }
@@ -20,7 +20,7 @@ export class GraphService {
    * get WordCloud
    * ***/
   getWordCloud(info): Observable<any> {
-    const url = this.host + `/climateAU_MP/climateAU_MP_Count`;
+    const url = this.API + `climateAU_MP/climateAU_MP_Count`;
     return this.http.post<any>(url, info);
   }
 }
