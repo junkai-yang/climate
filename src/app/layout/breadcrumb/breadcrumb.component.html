@@ -3,15 +3,17 @@
     <nz-breadcrumb-item *ngFor="let param of routerPath.split('/')">{{param}}</nz-breadcrumb-item>
   </div>
 
-    <div class="right">
-      <div class="info" id="date">Information Platform
-        <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
+  <div class="right">
+    <div class="info" id="date">Information Platform
+      <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
+
         <button type="button" id="searchDate" class="button" (click)="emitDate()">Search</button>
+
     </div>
-      <div class="info" id="date1">
-        <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
-        <i nz-icon nzType="search" nzTheme="outline" (click)="emitDate() " style="padding: 0 0 2px 6px"></i>
-      </div>
+    <div class="info" id="date1">
+      <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
+      <i nz-icon nzType="search" nzTheme="outline" (click)="emitDate()" style="padding: 0 0 2px 6px"></i>
+    </div>
   </div>
   <!--  <button (click)="clear()">clear</button>-->
 

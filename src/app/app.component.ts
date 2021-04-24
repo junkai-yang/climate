@@ -13,5 +13,6 @@ export class AppComponent {
   collapsed (event) {
     this.isCollapsed = event.collapsed
   }
+
 }
 
