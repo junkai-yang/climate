@@ -51,14 +51,14 @@ export class WordCloudComponent implements OnInit {
   constructor(private service: GraphService) {}
 
   ngOnInit(): void {
-    // this.service.getWordCloud({'num':"600"}).subscribe((data) => {
-    //   const words = []
-    //   // console.log(data.climateAU_MP_Count)
-    //   for (let word of data.climateAU_MP_Count) {
-    //     word = {"name":word._id,"value":word.value}
-    //     words.push(word)
-    //   }
-    //   this.data = words
+    this.service.getWordCloud({'num':"600"}).subscribe((data) => {
+      const words = []
+      // console.log(data.climateAU_MP_Count)
+      for (let word of data.climateAU_MP_Count) {
+        word = {"name":word._id,"value":word.value}
+        words.push(word)
+      }
+      this.data = words
 
       this.chart = echarts.init(document.getElementById('main'));
       this.chart.setOption({
@@ -94,13 +94,13 @@ export class WordCloudComponent implements OnInit {
               shadowColor: 'rgba(0, 0, 0, 0.15)'
             }
           },
-          data: this.testData,
+          data: this.data,
         }]
       })
 
       this.getClickValue()
 
-    // })
+    })
 
   }
 

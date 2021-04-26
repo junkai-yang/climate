@@ -10,8 +10,9 @@ export class GraphService {
   lineData = new Subject<any>();
 
   private httpOption = {} // for token
-  // API = `https://supergit.cn:4000/` // test
-  API = `localhost:4000/` // uni
+  API = `https://supergit.cn:4000/` // test
+  // API = `https://bigdata.ict.griffith.edu.au:4102/` // uni
+  // API = `/` // uni
 
   // host = '/api/'
 
