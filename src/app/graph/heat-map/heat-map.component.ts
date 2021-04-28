@@ -58,7 +58,7 @@ export class HeatMapComponent implements OnInit {
         .then(data => {
           console.log(this.data)
           const layer = new HeatmapLayer({})
-            .source(this.data)
+            .source(data)
             .shape('heatmap')
             .size('mag', [0, 1.0]) // weight映射通道
             .style({

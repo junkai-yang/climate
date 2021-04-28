@@ -11,6 +11,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {GraphModule} from "../graph/graph.module";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import {NzButtonModule} from "ng-zorro-antd/button";
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
     NzGridModule,
     GraphModule,
     NzCollapseModule,
+    NzModalModule,
+    NzButtonModule,
   ]
 })
 

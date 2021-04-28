@@ -58,7 +58,7 @@
   <div class="col-lg-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
       <nz-collapse-panel [nzActive]="collapse_line"  [nzHeader]="'Interactive Line Chart'">
-        <app-line-graph></app-line-graph>
+        <app-line-graph (msg)=getLineGraphVisible($event)></app-line-graph>
       </nz-collapse-panel>
     </nz-collapse>
   </div>
@@ -86,6 +86,15 @@
     </nz-collapse>
   </div>
 </div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Tips" [nzFooter]="modalFooter" nzClosable=false>
+  <ng-container *nzModalContent>
+    <p>Sorry, there is no data for the date you selected!</p>
+  </ng-container>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleOk()">Ok</button>
+  </ng-template>
+</nz-modal>
 
 <!--<ng-template #extraTpl>-->
 <!--  <i nz-icon nzType="link" nzTheme="outline" (click)="linkToLine($event)"></i>-->

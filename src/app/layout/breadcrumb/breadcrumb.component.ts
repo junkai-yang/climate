@@ -24,6 +24,11 @@ export class BreadcrumbComponent implements OnInit {
   endDay;
   returnDate;
 
+  change_list = {
+    "1": "01", "2": "02", "3": "03", "4": "04",
+    "5": "05", "6": "06", "7": "07", "8": "08", "9": "09",
+  }
+
 
   constructor(
     private router: Router,
@@ -53,11 +58,6 @@ export class BreadcrumbComponent implements OnInit {
     })
   }
 
-  clear() {
-    localStorage.removeItem('ContainGraph')
-  }
-
-
   emitDate() {
     if (this.date) {
       this.start = this.date[0]
@@ -68,64 +68,24 @@ export class BreadcrumbComponent implements OnInit {
       this.endYear = this.end.getFullYear()
       this.endMonth = this.end.getMonth() + 1
       this.endDay = this.end.getDate()
-      // console.log(typeof this.endDay)
-      if (this.endYear - this.startYear > 0) {    // more than 1 year
-        for (let i = 0; i < this.endYear - this.startYear + 1; i++) {
-          if (this.startYear + i === this.startYear) {  // is start year
-            this.returnDate = [{
-              "year": this.startYear,
-              "s_d": this.startDay,
-              "s_m": this.startMonth,
-              "e_d": 31,
-              "e_m": 12
-            }]
-          } else if (this.startYear + i === this.endYear) { // is end year
-            this.returnDate.push({
-              "year": this.endYear,
-              "s_d": 1,
-              "s_m": 1,
-              "e_d": this.endDay,
-              "e_m": this.endMonth
-            })
-          } else {    // is mid year
-            this.returnDate.push({
-              "year": this.startYear + i,
-              "s_d": 1,
-              "s_m": 1,
-              "e_d": 31,
-              "e_m": 12
-            })
-          }
-        }
-      } else {  // same year
-        this.returnDate = [{
-          "year": this.startYear,
-          "s_d": this.startDay,
-          "s_m": this.startMonth,
-          "e_d": this.endDay,
-          "e_m": this.endMonth
-        }]
-      }
+
+      this.startDay = this.change_list.hasOwnProperty(this.startDay) ? this.change_list[this.startDay] : this.startDay
+      this.endDay = this.change_list.hasOwnProperty(this.endDay) ? this.change_list[this.endDay] : this.endDay
+      this.startMonth = this.change_list.hasOwnProperty(this.startMonth) ? this.change_list[this.startMonth] : this.startMonth
+      this.endMonth = this.change_list.hasOwnProperty(this.endMonth) ? this.change_list[this.endMonth] : this.endMonth
+
+      const startDate = this.startYear + "-" + this.startMonth + "-" + this.startDay
+      const endDate = this.endYear + "-" + this.endMonth + "-" + this.endDay
+      this.returnDate = [{
+        "startDay": startDate,
+        "endDay": endDate
+      }]
+
     }
-    this.service.getLineGraph(
-    //   [{
-    //   "e_d": "31",
-    //   "e_m": "12",
-    //   "s_d": "1",
-    //   "s_m": "6",
-    //   "year": "2020"
-    // },{
-    //     "e_d": "1",
-    //     "e_m": "3",
-    //     "s_d": "1",
-    //     "s_m": "1",
-    //     "year": "2021"
-    //   }]
-      this.returnDate
-    ).subscribe((data) => {
-      // console.log(data)
+    this.service.getLineGraph(this.returnDate).subscribe((data) => {
       this.service.lineData.next(data)
     })
   }
 }
+
 

@@ -11,6 +11,9 @@ export class ContentComponent implements OnInit {
   collapse_word = true
   collapse_force = true
   collapse_map = true
+
+  isVisible = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -27,6 +30,16 @@ export class ContentComponent implements OnInit {
     // console.log('work')
     const domLine = document.getElementById('line')
     console.log(domLine.parentNode.removeChild(domLine))
+  }
+
+
+  handleOk(): void {
+    this.isVisible = false;
+  }
+
+  getLineGraphVisible(event){
+    console.log(event)
+    this.isVisible = event.visible
   }
 
 }
