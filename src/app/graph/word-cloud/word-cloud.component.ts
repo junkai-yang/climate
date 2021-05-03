@@ -17,7 +17,7 @@ export class WordCloudComponent implements OnInit {
   constructor(private service: GraphService) {}
 
   ngOnInit(): void {
-    this.service.getWordCloud({'num':"20"}).subscribe((data) => {
+    this.service.getWordCloud({'num':"100"}).subscribe((data) => {
       const words = []
       // console.log(data.climateAU_MP_Count)
       for (let word of data.climateAU_MP_Count) {
@@ -72,7 +72,7 @@ export class WordCloudComponent implements OnInit {
 
   getClickValue() {
     this.chart.on('click',function (word) {
-      console.log(word)
+      // console.log(word)
       this.msg.emit({'param':word})
     }.bind(this))
   }

@@ -21,24 +21,16 @@ export class ContentComponent implements OnInit {
   }
 
   getWordCloud(event) {
-    console.log(event)
+    // console.log(event)
     this.param_WordCloud = event.param.name;
   }
-
-  linkToLine(event) {
-    event.stopPropagation()
-    // console.log('work')
-    const domLine = document.getElementById('line')
-    console.log(domLine.parentNode.removeChild(domLine))
-  }
-
 
   handleOk(): void {
     this.isVisible = false;
   }
 
   getLineGraphVisible(event){
-    console.log(event)
+    // console.log(event)
     this.isVisible = event.visible
   }
 
