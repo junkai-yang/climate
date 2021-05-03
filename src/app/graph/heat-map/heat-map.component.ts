@@ -18,22 +18,23 @@ export class HeatMapComponent implements OnInit {
       {
         "type": "Feature",
         "properties": {"id": "ak16994521", "mag": 2.3},
-        "geometry": {"type": "Point", "coordinates": [-151.5129, 63.1016, 0.0]}
+        "geometry": {"type": "Point", "coordinates": [-151.5129, 63.1016]}
       },
       {
         "type": "Feature",
         "properties": {"id": "ak16994519", "mag": 1.7},
-        "geometry": {"type": "Point", "coordinates": [-150.4048, 63.1224, 105.5]}
+        "geometry": {"type": "Point", "coordinates": [-150.4048, 63.1224]}
       },
       {
         "type": "Feature",
         "properties": {"id": "ak16994517", "mag": 1.6},
-        "geometry": {"type": "Point", "coordinates": [-151.3597, 63.0781, 0.0]}
+        "geometry": {"type": "Point", "coordinates": [145.0422836,
+            -37.8895005]}
       },
       {
         "type": "Feature",
         "properties": {"id": "ci38021336", "mag": 1.42},
-        "geometry": {"type": "Point", "coordinates": [-118.497, 34.299667, 7.64]}
+        "geometry": {"type": "Point", "coordinates": [-118.497, 34.299667]}
       },]
   }
 
@@ -58,7 +59,7 @@ export class HeatMapComponent implements OnInit {
         .then(data => {
           console.log(this.data)
           const layer = new HeatmapLayer({})
-            .source(data)
+            .source(this.data)
             .shape('heatmap')
             .size('mag', [0, 1.0]) // weight映射通道
             .style({

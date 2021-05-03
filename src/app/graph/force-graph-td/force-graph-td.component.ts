@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import ForceGraph3D from '3d-force-graph';
 import SpriteText from "three-spritetext";
+import {GraphService} from "../graph.service";
 
 
 @Component({
@@ -12,33 +13,24 @@ export class ForceGraphTDComponent implements OnInit {
 
   @Input() WordCloudParam;
 
-  N = 80;
-  gData = {
-    nodes: [...Array(this.N).keys()].map(i => ({id: i})),
-    links: [...Array(this.N).keys()]
-      .filter(id => id)
-      .map(id => ({
-        source: id,
-        target: Math.round(Math.random() * (id - 1))
-      }))
-  };
-
   elem;
   ForceGraph = ForceGraph3D(); // init graph
+
+  data = {'nodes':[],'links':[]};
 
   highlightNodes = new Set();
   highlightLinks = new Set();
   hoverNode = null;
 
-  constructor() {
+  constructor(private service: GraphService) {
   }
 
   ngOnChanges(changes): void {
     console.log(changes)
     if (changes.WordCloudParam && changes.WordCloudParam.currentValue !== undefined) {
       this.WordCloudParam = changes.WordCloudParam.currentValue
-      for (let node of this.gData.nodes) {
-        if (node.id === Number(this.WordCloudParam)) {
+      for (let node of this.data.nodes) {
+        if (node.id === this.WordCloudParam) {
           this.clickNode(node)
         }
       }
@@ -47,58 +39,65 @@ export class ForceGraphTDComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gData.links.forEach(link => {
-      const a: any = this.gData.nodes[link.source];
-      const b: any = this.gData.nodes[link.target];
-      !a.neighbors && (a.neighbors = []);
-      !b.neighbors && (b.neighbors = []);
-      a.neighbors.push(b);
-      b.neighbors.push(a);
+    this.service.getNode({"num": 4}).subscribe((data) => {
+      this.data['nodes'] = data.climateAU_edge_Count[0].nodes
+      this.data['links'] = data.climateAU_edge_Count[1].links
+      console.log(this.data)
 
-      !a.links && (a.links = []);
-      !b.links && (b.links = []);
-      a.links.push(link);
-      b.links.push(link);
-    });
 
-    this.elem = document.getElementById('container');
+      this.elem = document.getElementById('container');
 
-    this.ForceGraph(this.elem)
-      .width(430)
-      .height(238)
-      .backgroundColor('#fff')
-      .showNavInfo(false)
-      .graphData(this.gData)
-      .nodeThreeObjectExtend(true)
-      .nodeThreeObject(node => {
-        const Node: any = node;
-        let text = '';
-        if (Node.id.length > 10) {
-          text = Node.id.substring(0, 9) + '...';
-        } else {
-          text = Node.id;
-        }
-        const sprite = new SpriteText(`${text}`);
-        sprite.material.depthWrite = false;
-        sprite.color = 'black';
-        sprite.textHeight = 5;
-        sprite.textHeight = 5;
-        sprite.center.y += 1.5;
-        return sprite;
-      })
-      .nodeColor(node => this.highlightNodes.has(node) ? node === this.hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : 'rgba(25,95,217,0.6)')
-      .linkWidth(link => this.highlightLinks.has(link) ? 3 : 1)
-      .linkDirectionalParticles(link => this.highlightLinks.has(link) ? 3 : 0)
-      .linkDirectionalParticleWidth(4)
-      .onNodeClick(node => this.clickNode(node))
+      this.ForceGraph(this.elem)
+        .width(430)
+        .height(238)
+        .backgroundColor('#fff')
+        .showNavInfo(false)
+        .graphData(this.data)
+        .nodeThreeObjectExtend(true)
+        .nodeThreeObject(node => {
+          const Node: any = node;
+          let text = '';
+          if (Node.id.length > 10) {
+            text = Node.id.substring(0, 9) + '...';
+          } else {
+            text = Node.id;
+          }
+          const sprite = new SpriteText(`${text}`);
+          sprite.material.depthWrite = false;
+          sprite.color = 'black';
+          sprite.textHeight = 5;
+          sprite.textHeight = 5;
+          sprite.center.y += 1.5;
+          return sprite;
+        })
+        .nodeColor(node => this.highlightNodes.has(node.id) ? node === this.hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : 'rgba(25,95,217,0.6)')
+        .linkWidth(link => {
+         const Link:any = link
+          if (this.highlightLinks.has(Link.id)){
+            return 3
+          } else {
+            return 1
+          }
+        })
+        .linkDirectionalParticles(link => {
+          const Link:any = link
+          if (this.highlightLinks.has(Link.id)){
+            return 3
+          } else {
+            return 0
+          }
+        })
+        .linkDirectionalParticleWidth(4)
+        .onNodeClick(node => this.clickNode(node))
+    })
   }
 
   search(node) {
     const distance = 100;
-    const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
 
     this.ForceGraph.cameraPosition(
-      { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+      {x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio}, // new position
       node, // lookAt ({ x, y, z })
       1500  // ms transition duration
     );
@@ -110,9 +109,12 @@ export class ForceGraphTDComponent implements OnInit {
     this.highlightNodes.clear();
     this.highlightLinks.clear();
     if (Node) {
-      this.highlightNodes.add(Node);
-      Node.neighbors.forEach(neighbor => this.highlightNodes.add(neighbor));
-      Node.links.forEach(link => this.highlightLinks.add(link));
+      this.highlightNodes.add(Node.id);
+      if (Node.hasOwnProperty('neighbors')){
+        for (let i=0; i< Node.neighbors.length; i++){
+          Node.neighbors[i].forEach(neighbor => this.highlightNodes.add(neighbor));
+        }
+      }
     }
 
     this.hoverNode = Node || null;
@@ -122,7 +124,6 @@ export class ForceGraphTDComponent implements OnInit {
   }
 
   updateHighlight() {
-    // trigger update of highlighted objects in scene
     this.ForceGraph
       .nodeColor(this.ForceGraph.nodeColor())
       .linkWidth(this.ForceGraph.linkWidth())

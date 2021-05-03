@@ -37,11 +37,9 @@ export class GraphService {
     return this.http.post<any>(url, date);
   }
 
-  // setLineData(data) {
-  //   this.lineData = data;
-  // }
-  //
-  // getLineData(): Observable<any> {
-  //   return this.lineData;
-  // }
+  getNode(info):Observable<any> {
+    const url = this.API + `climateAU_edg/climateAU_edge_Count`; // test
+    // const url = this.API + `climateAU_edge_Count`; // uni
+    return this.http.post<any>(url, info);
+  }
 }
