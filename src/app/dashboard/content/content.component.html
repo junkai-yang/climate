@@ -55,14 +55,14 @@
 
 <!--bootstrap style-->
 <div class="row mb-2">
-  <div class="col-lg-6">
+  <div class="col-xl-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
       <nz-collapse-panel [nzActive]="collapse_line"  [nzHeader]="'Interactive Line Chart'">
         <app-line-graph (msg)=getLineGraphVisible($event)></app-line-graph>
       </nz-collapse-panel>
     </nz-collapse>
   </div>
-  <div class="col-lg-6" >
+  <div class="col-xl-6" >
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
       <nz-collapse-panel [nzActive]="collapse_word" [nzHeader]="'Word Cloud'">
         <app-word-cloud (msg)="getWordCloud($event)"></app-word-cloud>
@@ -71,16 +71,16 @@
   </div>
 </div>
 <div class="row mb-2">
-  <div class="col-lg-6">
-    <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
+  <div class="col-xl-6">
+    <nz-collapse [nzGhost]="true" nzExpandIconPosition="right" style="align-items: center">
       <nz-collapse-panel [nzActive]="collapse_force" [nzHeader]="'Semantic Network'">
         <app-force-graph-td [WordCloudParam]="param_WordCloud"></app-force-graph-td>
       </nz-collapse-panel>
     </nz-collapse>
   </div>
-  <div class="col-lg-6">
+  <div class="col-xl-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
-      <nz-collapse-panel [nzActive]="collapse_map" [nzHeader]="'Heat Map'">
+      <nz-collapse-panel [nzActive]="collapse_map" [nzHeader]="'Heat Map'" style="align-items: center">
         <app-heat-map></app-heat-map>
       </nz-collapse-panel>
     </nz-collapse>

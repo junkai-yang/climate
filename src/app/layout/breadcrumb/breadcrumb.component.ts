@@ -23,6 +23,7 @@ export class BreadcrumbComponent implements OnInit {
   endMonth;
   endDay;
   returnDate;
+  heatReturnDate;
 
   change_list = {
     "1": "01", "2": "02", "3": "03", "4": "04",
@@ -80,10 +81,17 @@ export class BreadcrumbComponent implements OnInit {
         "startDay": startDate,
         "endDay": endDate
       }]
-
+      this.heatReturnDate = {
+        "startDay": startDate,
+        "endDay": endDate
+      }
     }
+
     this.service.getLineGraph(this.returnDate).subscribe((data) => {
       this.service.lineData.next(data)
+    })
+    this.service.getMap(this.heatReturnDate).subscribe((data) => {
+      this.service.heatData.next(data)
     })
   }
 }

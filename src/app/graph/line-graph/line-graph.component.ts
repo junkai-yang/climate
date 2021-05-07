@@ -130,6 +130,40 @@ export class LineGraphComponent implements OnInit {
 
     this.chart = echarts.init(document.getElementById('line'));
     this.chart.setOption({
+      toolbox: {
+        show: true,
+        itemGap: 5,
+        top: -5,
+        feature: {
+          dataView: {
+            show: false,
+          },
+          dataZoom: {
+            show: true,
+            iconStyle: {
+              opacity: 0,
+            },
+          },
+          restore: { show: false },
+          saveAsImage: { show: false },
+          // 全屏具体实现
+          myFull: {
+            show: true,
+            title: '全屏查看',
+            icon: `/assets/images/full.jpg`,
+            onclick: (e) => {
+              const element = document.getElementById(e.option.value);
+              if (element.requestFullscreen) { // HTML W3C 提议
+                element.requestFullscreen();
+              }
+              // 退出全屏
+              if (element.requestFullscreen) {
+                document.exitFullscreen();
+              }
+            },
+          },
+        },
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {

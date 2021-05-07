@@ -8,6 +8,7 @@ import {Observable, Subject} from 'rxjs';
 export class GraphService {
 
   lineData = new Subject<any>();
+  heatData = new Subject<any>();
 
   private httpOption = {} // for token
   // API = `https://supergit.cn:4000/` // test
@@ -23,8 +24,8 @@ export class GraphService {
    * get WordCloud Data
    * ***/
   getWordCloud(info): Observable<any> {
-    // const url = this.API + `climateAU_MP/climateAU_MP_Count`; // test
-    const url = this.API + `climateAU_MP_Count`; // uni
+    const url = this.API + `climateAU_MP/climateAU_MP_Count`; // test
+    // const url = this.API + `climateAU_MP_Count`; // uni
     return this.http.post<any>(url, info);
   }
 
@@ -32,14 +33,27 @@ export class GraphService {
    * get Line Data   https://supergit.cn:4000/climateAU/climateAU_MP_Count
    * ***/
   getLineGraph(date): Observable<any> {
-    // const url = this.API + `climateAU/climateAU_MP_Count`; // test
-    const url = this.API + `climateAU_Count`; // uni
+    const url = this.API + `climateAU/climateAU_MP_Count`; // test
+    // const url = this.API + `climateAU_Count`; // uni
     return this.http.post<any>(url, date);
   }
 
-  getNode(info):Observable<any> {
-    // const url = this.API + `climateAU_edg/climateAU_edge_Count`; // test
-    const url = this.API + `climateAU_edge_Count`; // uni
+  /***
+   * get semantic network data
+   */
+  getNode(info): Observable<any> {
+    const url = this.API + `climateAU_edg/climateAU_edge_Count`; // test
+    // const url = this.API + `climateAU_edge_Count`; // uni
     return this.http.post<any>(url, info);
   }
+
+  /***
+   * get heatmap data
+   */
+  getMap(info): Observable<any> {
+    const url = this.API + `climateAU/climateAU_MP_HeatMap`; //test
+    // const url = this.API + `climateAU_MP_HeatMap`; // uni
+    return this.http.post(url, info);
+  }
+
 }

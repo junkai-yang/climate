@@ -48,8 +48,8 @@ export class ForceGraphTDComponent implements OnInit {
       this.elem = document.getElementById('container');
 
       this.ForceGraph(this.elem)
-        .width(430)
-        .height(238)
+        .width(520)
+        .height(287)
         .backgroundColor('#fff')
         .showNavInfo(false)
         .graphData(this.data)
