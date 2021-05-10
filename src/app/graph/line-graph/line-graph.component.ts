@@ -3,7 +3,6 @@ import * as echarts from "echarts";
 import {GraphService} from "../graph.service";
 import {Router} from "@angular/router";
 
-
 @Component({
   selector: 'app-line-graph',
   templateUrl: './line-graph.component.html',
@@ -32,6 +31,8 @@ export class LineGraphComponent implements OnInit {
     "01": "1", "02": "2", "03": "3", "04": "4",
     "05": "5", "06": "6", "07": "7", "08": "8", "09": "9",
   }
+  selectedBacklogType: any;
+  setTheHeight: any;
 
   constructor(private service: GraphService,
               private router: Router) {
@@ -118,6 +119,7 @@ export class LineGraphComponent implements OnInit {
         option.xAxis[0].data = this.final_date
 
         this.chart.setOption(option)
+        window.onresize = this.chart.resize;
         this.pos_data = []
         this.nat_data = []
         this.neg_data = []

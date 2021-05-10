@@ -18,6 +18,7 @@ export class WordCloudComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getWordCloud({'num':"100"}).subscribe((data) => {
+      console.log(data)
       const words = []
       // console.log(data.climateAU_MP_Count)
       for (let word of data.climateAU_MP_Count) {
@@ -63,6 +64,7 @@ export class WordCloudComponent implements OnInit {
           data: this.data,
         }]
       })
+      window.onresize = this.chart.resize;
 
       this.getClickValue()
 

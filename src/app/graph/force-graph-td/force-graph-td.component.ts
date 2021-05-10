@@ -79,6 +79,8 @@ export class ForceGraphTDComponent implements OnInit {
             return 1
           }
         })
+
+
         .linkDirectionalParticles(link => {
           const Link:any = link
           if (this.highlightLinks.has(Link.id)){
@@ -90,7 +92,9 @@ export class ForceGraphTDComponent implements OnInit {
         .linkDirectionalParticleWidth(4)
         .onNodeClick(node => this.clickNode(node))
     })
+
   }
+
 
   search(node) {
     const distance = 100;

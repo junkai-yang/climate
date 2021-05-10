@@ -11,8 +11,8 @@ export class GraphService {
   heatData = new Subject<any>();
 
   private httpOption = {} // for token
-  // API = `https://supergit.cn:4000/` // test
-  API = `https://bigdata.ict.griffith.edu.au:4102/` // uni
+  API = `https://supergit.cn:4000/` // test
+  // API = `https://bigdata.ict.griffith.edu.au:4102/` // uni
 
 
   // host = '/api/'

@@ -42,6 +42,7 @@ export class HeatMapComponent implements OnInit {
         zoom: 3.632456779444394,
       })
     });
+    window.onresize = this.scene.resize;
 
     this.service.heatData.subscribe(data => {
       console.log(data)
@@ -72,5 +73,6 @@ export class HeatMapComponent implements OnInit {
         this.scene.addLayer(layer);
       }
     })
+
   }
 }
