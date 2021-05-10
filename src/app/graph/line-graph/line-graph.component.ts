@@ -237,6 +237,6 @@ export class LineGraphComponent implements OnInit {
         }
       ]
     })
-
+    window.addEventListener("resize",()=> (this.chart.resize()));
   }
 }
