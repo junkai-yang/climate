@@ -48,6 +48,7 @@ export class LineGraphComponent implements OnInit {
       this.service.lineData.next(data)
     })
 
+
     // this.service.lineData.subscribe(data => {
     //   this.final_datas = []  // clean storage
     //   for (let j = 0; j < data.climateAU_MP_Count.length; j++) {  //  for more than one year
@@ -119,7 +120,6 @@ export class LineGraphComponent implements OnInit {
         option.xAxis[0].data = this.final_date
 
         this.chart.setOption(option)
-        window.onresize = this.chart.resize;
         this.pos_data = []
         this.nat_data = []
         this.neg_data = []
@@ -127,10 +127,14 @@ export class LineGraphComponent implements OnInit {
       } else {
         this.msg.emit({"visible":true})
       }
+      // window.onresize = this.chart.resize;
+      window.addEventListener("resize",()=> (this.chart.resize()));
     })
 
 
+
     this.chart = echarts.init(document.getElementById('line'));
+
     this.chart.setOption({
       toolbox: {
         show: true,
@@ -233,6 +237,6 @@ export class LineGraphComponent implements OnInit {
         }
       ]
     })
-  }
 
+  }
 }
