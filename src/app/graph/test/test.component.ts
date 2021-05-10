@@ -8,6 +8,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {WordCloudComponent} from "../word-cloud/word-cloud.component";
+import * as screenfull from "screenfull"
+import {Screenfull} from "screenfull"
 
 
 @Component({
@@ -35,5 +37,4 @@ export class TestComponent implements OnInit {
   remove() {
     this.container.clear();
   }
-
 }

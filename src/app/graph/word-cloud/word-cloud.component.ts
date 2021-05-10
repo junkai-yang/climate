@@ -28,6 +28,7 @@ export class WordCloudComponent implements OnInit {
       this.data = words
 
       this.chart = echarts.init(document.getElementById('main'));
+      window.onresize = this.chart.resize;
       this.chart.setOption({
         backgroundColor: '#fff',
         tooltip: {
@@ -64,7 +65,7 @@ export class WordCloudComponent implements OnInit {
           data: this.data,
         }]
       })
-      window.onresize = this.chart.resize;
+
 
       this.getClickValue()
 

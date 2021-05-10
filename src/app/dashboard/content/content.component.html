@@ -57,12 +57,12 @@
 <div class="row mb-2">
   <div class="col-xl-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
-      <nz-collapse-panel [nzActive]="collapse_line"  [nzHeader]="'Interactive Line Chart'">
+      <nz-collapse-panel [nzActive]="collapse_line" [nzHeader]="'Interactive Line Chart'">
         <app-line-graph (msg)=getLineGraphVisible($event)></app-line-graph>
       </nz-collapse-panel>
     </nz-collapse>
   </div>
-  <div class="col-xl-6" >
+  <div class="col-xl-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right">
       <nz-collapse-panel [nzActive]="collapse_word" [nzHeader]="'Word Cloud'">
         <app-word-cloud (msg)="getWordCloud($event)"></app-word-cloud>
@@ -73,7 +73,7 @@
 <div class="row mb-2">
   <div class="col-xl-6">
     <nz-collapse [nzGhost]="true" nzExpandIconPosition="right" style="align-items: center">
-      <nz-collapse-panel [nzActive]="collapse_force" [nzHeader]="'Semantic Network'">
+      <nz-collapse-panel [nzActive]="collapse_force" [nzHeader]="'Semantic Network'" [nzExtra]="extraTpl">
         <app-force-graph-td [WordCloudParam]="param_WordCloud"></app-force-graph-td>
       </nz-collapse-panel>
     </nz-collapse>
@@ -96,6 +96,6 @@
   </ng-template>
 </nz-modal>
 
-<!--<ng-template #extraTpl>-->
-<!--  <i nz-icon nzType="link" nzTheme="outline" (click)="linkToLine($event)"></i>-->
-<!--</ng-template>-->
+<ng-template #extraTpl>
+    <i nz-icon nzType="arrows-alt" nzTheme="outline" (click)="changeSize($event)"></i>
+</ng-template>

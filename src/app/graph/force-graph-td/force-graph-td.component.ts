@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import ForceGraph3D from '3d-force-graph';
 import SpriteText from "three-spritetext";
 import {GraphService} from "../graph.service";
+import {EventManager} from "@angular/platform-browser";
 
 
 @Component({
@@ -16,13 +17,14 @@ export class ForceGraphTDComponent implements OnInit {
   elem;
   ForceGraph = ForceGraph3D(); // init graph
 
-  data = {'nodes':[],'links':[]};
+  data = {'nodes': [], 'links': []};
 
   highlightNodes = new Set();
   highlightLinks = new Set();
   hoverNode = null;
 
-  constructor(private service: GraphService) {
+  constructor(private service: GraphService,
+              private eventManager: EventManager) {
   }
 
   ngOnChanges(changes): void {
@@ -39,7 +41,14 @@ export class ForceGraphTDComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getNode({"num": 100}).subscribe((data) => {
+
+
+    this.service.nodeSize.subscribe((data) => {
+      this.ForceGraph.width(data.width)
+      this.ForceGraph.height(data.height)
+    })
+
+    this.service.getNode({"num": 5}).subscribe((data) => {
       this.data['nodes'] = data.climateAU_edge_Count[0].nodes
       this.data['links'] = data.climateAU_edge_Count[1].links
       console.log(this.data)
@@ -72,18 +81,16 @@ export class ForceGraphTDComponent implements OnInit {
         })
         .nodeColor(node => this.highlightNodes.has(node.id) ? node === this.hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : 'rgba(25,95,217,0.6)')
         .linkWidth(link => {
-         const Link:any = link
-          if (this.highlightLinks.has(Link.id)){
+          const Link: any = link
+          if (this.highlightLinks.has(Link.id)) {
             return 3
           } else {
             return 1
           }
         })
-
-
         .linkDirectionalParticles(link => {
-          const Link:any = link
-          if (this.highlightLinks.has(Link.id)){
+          const Link: any = link
+          if (this.highlightLinks.has(Link.id)) {
             return 3
           } else {
             return 0
@@ -92,7 +99,11 @@ export class ForceGraphTDComponent implements OnInit {
         .linkDirectionalParticleWidth(4)
         .onNodeClick(node => this.clickNode(node))
     })
-
+    this.service.nodeSize.subscribe((data) => {
+      this.ForceGraph
+        .width(data.width)
+        .height(data.height)
+    })
   }
 
 
@@ -114,8 +125,8 @@ export class ForceGraphTDComponent implements OnInit {
     this.highlightLinks.clear();
     if (Node) {
       this.highlightNodes.add(Node.id);
-      if (Node.hasOwnProperty('neighbors')){
-        for (let i=0; i< Node.neighbors.length; i++){
+      if (Node.hasOwnProperty('neighbors')) {
+        for (let i = 0; i < Node.neighbors.length; i++) {
           Node.neighbors[i].forEach(neighbor => this.highlightNodes.add(neighbor));
         }
       }

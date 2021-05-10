@@ -9,6 +9,7 @@ export class GraphService {
 
   lineData = new Subject<any>();
   heatData = new Subject<any>();
+  nodeSize = new Subject<any>();
 
   private httpOption = {} // for token
   API = `https://supergit.cn:4000/` // test

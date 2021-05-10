@@ -18,6 +18,7 @@ export class HeatMapComponent implements OnInit {
       []
   }
 
+
   constructor(private service: GraphService) {
   }
 
@@ -40,6 +41,7 @@ export class HeatMapComponent implements OnInit {
         pitch: 0,
         center: [151.20203162, -33.88513759],
         zoom: 3.632456779444394,
+        token:'pk.eyJ1IjoianVua2FpeWFuZyIsImEiOiJja29pb2Fpc2EwNWl0MnZvOG92OTZid2hzIn0.ZzoiytEa4-44cNscLggWXA'
       })
     });
     window.onresize = this.scene.resize;

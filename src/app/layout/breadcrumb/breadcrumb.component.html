@@ -11,8 +11,8 @@
 
     </div>
     <div class="info" id="date1">
+      <i nz-icon nzType="search" nzTheme="outline" (click)="emitDate()" style="padding: 0 8px 4px 6px"></i>
       <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="date"></nz-range-picker>
-      <i nz-icon nzType="search" nzTheme="outline" (click)="emitDate()" style="padding: 0 0 2px 6px"></i>
     </div>
   </div>
   <!--  <button (click)="clear()">clear</button>-->
