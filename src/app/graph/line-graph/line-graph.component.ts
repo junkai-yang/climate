@@ -41,7 +41,7 @@ export class LineGraphComponent implements OnInit {
   ngOnInit(): void {
     this.service.getLineGraph(([
       {
-        "startDay": "2020-11-01",
+        "startDay": "2019-01-01",
         "endDay": "2020-12-31"
       }
     ])).subscribe((data) => {
