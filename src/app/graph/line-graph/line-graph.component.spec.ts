@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LineGraphComponent } from './line-graph.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('LineGraphComponent', () => {
   let component: LineGraphComponent;
@@ -8,6 +10,8 @@ describe('LineGraphComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[RouterTestingModule,
+        HttpClientTestingModule],
       declarations: [ LineGraphComponent ]
     })
     .compileComponents();
