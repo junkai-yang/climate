@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForceGraphTDComponent } from './force-graph-td.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ForceGraphTDComponent', () => {
   let component: ForceGraphTDComponent;
@@ -8,6 +9,7 @@ describe('ForceGraphTDComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ ForceGraphTDComponent ]
     })
     .compileComponents();

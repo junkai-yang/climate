@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WordCloudComponent } from './word-cloud.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('WordCloudComponent', () => {
   let component: WordCloudComponent;
@@ -8,6 +9,7 @@ describe('WordCloudComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ WordCloudComponent ]
     })
     .compileComponents();

@@ -48,7 +48,7 @@ export class ForceGraphTDComponent implements OnInit {
       this.ForceGraph.height(data.height)
     })
 
-    this.service.getNode({"num": 100}).subscribe((data) => {
+    this.service.getNode({"num": 3}).subscribe((data) => {
       this.data['nodes'] = data.climateAU_edge_Count[0].nodes
       this.data['links'] = data.climateAU_edge_Count[1].links
       console.log(this.data)
