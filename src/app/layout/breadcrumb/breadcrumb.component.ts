@@ -75,8 +75,8 @@ export class BreadcrumbComponent implements OnInit {
       this.startMonth = this.change_list.hasOwnProperty(this.startMonth) ? this.change_list[this.startMonth] : this.startMonth
       this.endMonth = this.change_list.hasOwnProperty(this.endMonth) ? this.change_list[this.endMonth] : this.endMonth
 
-      const startDate = this.startYear + "-" + this.startMonth + "-" + this.startDay
-      const endDate = this.endYear + "-" + this.endMonth + "-" + this.endDay
+      const startDate = this.startYear + "/" + this.startMonth + "/" + this.startDay
+      const endDate = this.endYear + "/" + this.endMonth + "/" + this.endDay
       this.returnDate = [{
         "startDay": startDate,
         "endDay": endDate
@@ -86,7 +86,6 @@ export class BreadcrumbComponent implements OnInit {
         "endDay": endDate
       }
     }
-
     this.service.getLineGraph(this.returnDate).subscribe((data) => {
       this.service.lineData.next(data)
     })

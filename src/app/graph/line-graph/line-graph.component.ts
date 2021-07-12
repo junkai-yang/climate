@@ -1,4 +1,4 @@
-import {Component, OnInit, Output,EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import * as echarts from "echarts";
 import {GraphService} from "../graph.service";
 import {Router} from "@angular/router";
@@ -39,29 +39,25 @@ export class LineGraphComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getLineGraph(([
-      {
-        "startDay": "2019-01-01",
-        "endDay": "2020-12-31"
-      }
-    ])).subscribe((data) => {
-      this.service.lineData.next(data)
-    })
-
-
-    this.service.lineData.subscribe(data => {
-      if (data.climateAU_MP_Count !== undefined) {
-        this.datas = data.climateAU_MP_Count
+    // this.service.getLineGraph(([
+    //   {
+    //     "startDay": "2019-01-01",
+    //     "endDay": "2020-12-31"
+    //   }
+    // ])).subscribe((data) => {
+    //   this.service.lineData.next(data)
+    // })     // old version
+    this.service.getInitLineData().subscribe((data) => {
+      if (data.climateAU_All_Compaund !== undefined) {
+        this.datas = data.climateAU_All_Compaund
         for (let i = 0; i < this.datas.length; i++) {
-          const date = this.datas[i].year.split("_")
-          const month = this.month_list[date[1]]
-          const day = this.day_list.hasOwnProperty(date[2]) ? this.day_list[date[2]] : date[2]
-          const changed_date = date[0] + "." + month + '.' + day
-          this.final_date.push(changed_date)
-          this.pos_data.push(this.datas[i].post)
-          this.neg_data.push(this.datas[i].neg)
-          this.nat_data.push(this.datas[i].net)
+          const date = this.datas[i].created_at.replace('/', '.')
+          this.final_date.push(date)
+          this.pos_data.push(this.datas[i].positive)
+          this.neg_data.push(this.datas[i].negative)
+          this.nat_data.push(this.datas[i].neutral)
         }
+
         const option = this.chart.getOption()
 
         option.series[0].data = this.pos_data;
@@ -75,12 +71,65 @@ export class LineGraphComponent implements OnInit {
         this.neg_data = []
         this.final_date = []
       } else {
-        this.msg.emit({"visible":true})
+        this.msg.emit({"visible": true})
+      }
+    })
+
+
+    this.service.lineData.subscribe(data => {
+      // if (data.climateAU_MP_Count !== undefined) {
+      //   this.datas = data.climateAU_MP_Count
+      //   for (let i = 0; i < this.datas.length; i++) {
+      //     const date = this.datas[i].year.split("_")
+      //     const month = this.month_list[date[1]]
+      //     const day = this.day_list.hasOwnProperty(date[2]) ? this.day_list[date[2]] : date[2]
+      //     const changed_date = date[0] + "." + month + '.' + day
+      //     this.final_date.push(changed_date)
+      //     this.pos_data.push(this.datas[i].post)
+      //     this.neg_data.push(this.datas[i].neg)
+      //     this.nat_data.push(this.datas[i].net)
+      //   }
+      //   const option = this.chart.getOption()
+      //
+      //   option.series[0].data = this.pos_data;
+      //   option.series[1].data = this.nat_data;
+      //   option.series[2].data = this.neg_data;
+      //   option.xAxis[0].data = this.final_date
+      //
+      //   this.chart.setOption(option)
+      //   this.pos_data = []
+      //   this.nat_data = []
+      //   this.neg_data = []
+      //   this.final_date = []
+      // }
+      if (data.climateAU_Choose_Compaund !== undefined && data.climateAU_Choose_Compaund.length !== 0 ) {
+        this.datas = data.climateAU_Choose_Compaund
+        for (let i = 0; i < this.datas.length; i++) {
+          const date = this.datas[i].created_at.replace('/', '.')
+          this.final_date.push(date)
+          this.pos_data.push(this.datas[i].positive)
+          this.neg_data.push(this.datas[i].negative)
+          this.nat_data.push(this.datas[i].neutral)
+        }
+
+        const option = this.chart.getOption()
+
+        option.series[0].data = this.pos_data;
+        option.series[1].data = this.nat_data;
+        option.series[2].data = this.neg_data;
+        option.xAxis[0].data = this.final_date
+
+        this.chart.setOption(option)
+        this.pos_data = []
+        this.nat_data = []
+        this.neg_data = []
+        this.final_date = []
+      }  else {
+        this.msg.emit({"visible": true})
       }
       // window.onresize = this.chart.resize;
       // window.addEventListener("resize",()=> (this.chart.resize()));
     })
-
 
 
     this.chart = echarts.init(document.getElementById('line'));
@@ -96,7 +145,7 @@ export class LineGraphComponent implements OnInit {
         }
       },
       legend: {
-        data: ['positive', 'natural', 'negative']
+        data: ['positive', 'neutral', 'negative']
       },
       grid: {
         left: '3%',
@@ -129,7 +178,7 @@ export class LineGraphComponent implements OnInit {
         },
 
         {
-          name: 'natural',
+          name: 'neutral',
           type: 'line',
           stack: '总量',
           areaStyle: {},
@@ -155,7 +204,7 @@ export class LineGraphComponent implements OnInit {
     })
     setTimeout(() => {
       this.chart.resize()
-    },4000)
-    window.addEventListener("resize",()=> (this.chart.resize()));
+    }, 4000)
+    window.addEventListener("resize", () => (this.chart.resize()));
   }
 }

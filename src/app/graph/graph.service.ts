@@ -13,6 +13,7 @@ export class GraphService {
 
   private httpOption = {} // for token
   // API = `https://supergit.cn:4000/` // test
+  // API = `https://supergit.cn:6000/` // test
   API = `https://bigdata.ict.griffith.edu.au:4102/` // uni
 
 
@@ -34,7 +35,7 @@ export class GraphService {
    * get Line Data   https://supergit.cn:4000/climateAU/climateAU_MP_Count
    * ***/
   getLineGraph(date): Observable<any> {
-    const url = this.API + `climateAU/climateAU_MP_Count`; // test
+    const url = this.API + `climateAU/climateAU_Choose_Compaund`; // test
     // const url = this.API + `climateAU_Count`; // uni
     return this.http.post<any>(url, date);
   }
@@ -57,4 +58,8 @@ export class GraphService {
     return this.http.post(url, info);
   }
 
+  getInitLineData(): Observable<any> {
+    const url = this.API + `climateAU/climateAU_All_Compaund`
+    return this.http.get(url);
+  }
 }

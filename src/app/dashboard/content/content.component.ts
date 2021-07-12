@@ -41,7 +41,7 @@ export class ContentComponent implements OnInit {
   }
 
   getLineGraphVisible(event) {
-    // console.log(event)
+    console.log(event)
     this.isVisible = event.visible
   }
 
